@@ -20,11 +20,6 @@ public class ClienteController {
 
     private final ClienteService service;
 
-    @GetMapping
-    public String status() {
-        return  "ok";
-    }
-
     @PostMapping
     public ResponseEntity save(@RequestBody ClienteSaveRequest request) {
         Cliente cliente = new Cliente();
