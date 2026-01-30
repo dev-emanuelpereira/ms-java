@@ -1,10 +1,13 @@
 package com.github.dev_emanuelpereira.msavaliadorcredito.application.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.dev_emanuelpereira.msavaliadorcredito.application.exception.DadosClienteNotFoundException;
 import com.github.dev_emanuelpereira.msavaliadorcredito.application.exception.ErroComunicacaoMicroservicesException;
+import com.github.dev_emanuelpereira.msavaliadorcredito.application.exception.ErroSolicitacaoCartaoException;
 import com.github.dev_emanuelpereira.msavaliadorcredito.domain.model.*;
 import com.github.dev_emanuelpereira.msavaliadorcredito.infra.clients.CartoesResourceClient;
 import com.github.dev_emanuelpereira.msavaliadorcredito.infra.clients.ClienteResourceClient;
+import com.github.dev_emanuelpereira.msavaliadorcredito.infra.mqueue.SolicitacaoEmissaoCartaoPublisher;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +25,7 @@ public class AvaliadorCreditoService {
 
     private final ClienteResourceClient clientesClient;
     private final CartoesResourceClient cartoesClient;
+    private final SolicitacaoEmissaoCartaoPublisher solicitacaoEmissaoCartaoPublisher;
 
     public SituacaoCliente obterSituacaoCliente(String cpf) throws DadosClienteNotFoundException, ErroComunicacaoMicroservicesException {
         try {
@@ -77,5 +82,17 @@ public class AvaliadorCreditoService {
 
             }
         }
+
+    public ProtocoloSolicitacaoCartao solicitacaoEmissaoCartao(DadosSolicitacaoEmissaoCartao dados) {
+        try {
+            solicitacaoEmissaoCartaoPublisher.solicitarCartao(dados);
+            var protocolo = UUID.randomUUID().toString();
+
+            return new ProtocoloSolicitacaoCartao(protocolo);
+        } catch (Exception e) {
+            throw new ErroSolicitacaoCartaoException(e.getMessage());
+        }
     }
+}
+
 
