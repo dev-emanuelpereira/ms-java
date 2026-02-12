@@ -43,7 +43,7 @@ public class AvaliadorCreditoController {
         }
     }
 
-    @GetMapping("solicitacoes-cartao")
+    @PostMapping("solicitacoes-cartao")
     public ResponseEntity solicitarCartao(@RequestBody DadosSolicitacaoEmissaoCartao dados) {
         try {
             ProtocoloSolicitacaoCartao protocoloSolicitacaoCartao = avaliadorCreditoService

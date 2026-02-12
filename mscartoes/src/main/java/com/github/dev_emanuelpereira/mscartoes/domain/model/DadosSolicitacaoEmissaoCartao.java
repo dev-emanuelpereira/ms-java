@@ -1,4 +1,4 @@
-package com.github.dev_emanuelpereira.msavaliadorcredito.domain.model;
+package com.github.dev_emanuelpereira.mscartoes.domain.model;
 
 import lombok.Data;
 

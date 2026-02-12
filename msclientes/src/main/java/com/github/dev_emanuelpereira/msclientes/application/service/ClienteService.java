@@ -18,6 +18,6 @@ public class ClienteService {
     }
 
     public Optional<Cliente> obterDadosCliente(String cpf) {
-        return repository.findByCpf(cpf);
+        return repository.findFirstByCpf(cpf);
     }
 }
