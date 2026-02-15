@@ -1,6 +1,10 @@
 spring:
+  profiles:
+    active: dev
+
   application:
     name: mscartoes
+
   rabbitmq:
     host: localhost
     port: 5672

@@ -1,4 +1,7 @@
 spring:
+  profiles:
+    active: dev
+
   application:
     name: msavaliadorcredito
   rabbitmq:
@@ -27,7 +30,7 @@ management:
   endpoint:
     web:
       exposure:
-        include: *
+        include: '*'
 
 logging:
   file:
