@@ -1,6 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:h2:mem:dbinmemory
-    username: sa
-    password: password
-    driver-class-name: org.h2.Driver

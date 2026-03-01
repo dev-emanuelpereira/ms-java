@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ms_java
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  rabbitmq:
+    host: ${RABBITMQ_SERVER}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_USER}:${EUREKA_PASSWORD}@${EUREKA_SERVER}:8761/eureka

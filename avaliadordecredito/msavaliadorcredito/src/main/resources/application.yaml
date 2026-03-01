@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: msavaliadorcredito
+
+  rabbitmq:
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 0
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+mq:
+  queues:
+    emissao-cartoes: emissao-cartoes
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  file:
+    name: ./logs/log-file.log

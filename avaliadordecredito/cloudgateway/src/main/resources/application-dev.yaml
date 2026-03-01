@@ -1,0 +1,11 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/ms-courserealm
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-user:aismdoiam12@localhost:8761/eureka

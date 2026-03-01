@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: mscartoes
+
+  rabbitmq:
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 0
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+mq:
+  queues:
+    emissao-cartoes: emissao-cartoes
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
